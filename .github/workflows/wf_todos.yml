@@ -42,16 +42,17 @@ jobs:
           echo "var2=${{ vars.VAR_APELLIDO }}" >> $GITHUB_OUTPUT
           echo "secreto2=${{ secrets.SEGUNDO_NOMBRE_ENTORNO }}" >> $GITHUB_OUTPUT
           echo "secreto2=${{ secrets.SEGUNDO_NOMBRE_ENTORNO }}"
+
   llamar-workflowlib:
     needs: preparar-vars
     uses: manuveta/reusable_workflows/.github/workflows/workflowlib_imprimevars.yml@main
-    #.github/workflows/workflowlib_imprimevars.yml
     with:
       VAR_1: ${{ needs.preparar-vars.outputs.var1 }}
       VAR_2: ${{ needs.preparar-vars.outputs.var2 }}
       SECRETO_2: ${{ needs.preparar-vars.outputs.secreto2 }} #github va a bloquear el acceso a los secretos de los workflows que llaman a otros workflows se debe poner a nivel repo
     secrets:
       SECRETO_1: ${{ secrets.NOMBRE_SECRETO }}
+
   llamar-action:
     runs-on: ubuntu-latest
     steps:
@@ -61,4 +62,4 @@ jobs:
        #   token: ${{ secrets.ACTIONS_PAT }}
       - uses: manuveta/actions@main
         with:
-          name: "Manuel de Jesus Ramiro Velazquez Tapia"
+          name: "Manuel de J. R. Velazquez Tapia"
