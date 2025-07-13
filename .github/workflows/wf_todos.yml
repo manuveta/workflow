@@ -1,0 +1,63 @@
+
+name: imprime llama wf lib y action 
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  imprime:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    #declaramos entorno para acceder a las variables y secretos del repositorio
+    environment: DESARROLLO
+
+    steps:
+      - name: imprimir secretos y variables, por repo y por entorno
+        run: |
+          echo REPOSITORY SECRET is ${{ secrets.NOMBRE_SECRETO }}
+          echo entorno DESARROLLO SECRET is ${{ secrets.SEGUNDO_NOMBRE_ENTORNO }}
+          echo REPOSITORY var VAR_SEGUNDO_APELLIDO_REPO is ${{ vars.VAR_SEGUNDO_APELLIDO_REPO }}
+          echo entorno DESARROLLO var VAR_APELLIDO is ${{ vars.VAR_APELLIDO }}
+  #prepara las variables para consumir en el workflowlib
+  preparar-vars:
+    runs-on: ubuntu-latest
+    environment: DESARROLLO
+    outputs:
+      var1: ${{ steps.set_vars.outputs.var1 }}
+      var2: ${{ steps.set_vars.outputs.var2 }}
+      secreto2: ${{ steps.set_vars.outputs.secreto2 }}
+    steps:
+      - name: Obtener variables
+        id: set_vars
+        run: |
+          echo "var1=${{ vars.VAR_SEGUNDO_APELLIDO_REPO }}" >> $GITHUB_OUTPUT
+          echo "var2=${{ vars.VAR_APELLIDO }}" >> $GITHUB_OUTPUT
+          echo "secreto2=${{ secrets.SEGUNDO_NOMBRE_ENTORNO }}" >> $GITHUB_OUTPUT
+          echo "secreto2=${{ secrets.SEGUNDO_NOMBRE_ENTORNO }}"
+  llamar-workflowlib:
+    needs: preparar-vars
+    uses: manuveta/reusable_workflows/.github/workflows/workflowlib_imprimevars.yml@main
+    with:
+      VAR_1: ${{ needs.preparar-vars.outputs.var1 }}
+      VAR_2: ${{ needs.preparar-vars.outputs.var2 }}
+      SECRETO_2: ${{ needs.preparar-vars.outputs.secreto2 }} #github va a bloquear el acceso a los secretos de los workflows que llaman a otros workflows se debe poner a nivel repo
+    secrets:
+      SECRETO_1: ${{ secrets.NOMBRE_SECRETO }}
+  llamar-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout con token privado
+        uses: actions/checkout@v4
+       # with:
+       #   token: ${{ secrets.ACTIONS_PAT }}
+      - uses: manuveta/actions@main
+        with:
+          name: "Manuel de Jesus Ramiro Velazquez Tapia"
