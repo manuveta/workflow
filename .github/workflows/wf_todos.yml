@@ -53,13 +53,13 @@ jobs:
     secrets:
       SECRETO_1: ${{ secrets.NOMBRE_SECRETO }}
 
-  llamar-action:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout con token privado
-        uses: actions/checkout@v4
-       # with:
-       #   token: ${{ secrets.ACTIONS_PAT }}
-      - uses: manuveta/actions@main
-        with:
-          name: "Manuel de J. R. Velazquez Tapia"
+  # llamar-action:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout con token privado
+  #       uses: actions/checkout@v4
+  #      # with:
+  #      #   token: ${{ secrets.ACTIONS_PAT }}
+  #     - uses: manuveta/actions@main
+  #       with:
+  #         name: "Manuel de J. R. Velazquez Tapia"
