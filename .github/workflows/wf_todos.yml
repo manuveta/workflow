@@ -45,7 +45,7 @@ jobs:
 
   llamar-workflowlib:
     needs: preparar-vars
-    uses: manuveta/reusable_workflows/.github/workflows/workflowlib_imprimevars.yml@main
+    uses: manuveta/reusable_workflows/.github/workflows/workflowlib_imprimevars.yml@main #invoca reusable wf de un repo de organizacion
    #uses: AL07183522/reusable_wf1/.github/workflows/workflowlib_imprimevars.yml@main
     with:
       VAR_1: ${{ needs.preparar-vars.outputs.var1 }}
@@ -56,11 +56,16 @@ jobs:
 
   llamar-action:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
-      - name: Checkout con token privado
-        uses: actions/checkout@v4
-       # with:
-       #   token: ${{ secrets.ACTIONS_PAT }}
-      - uses: manuveta/actions@main
+      - name: invoca action creado
+        uses: manuveta/actions@main
         with:
           name: "Manuel de J. R. Velazquez Tapia"
+      - name: invoca action del marketplace
+        uses: actions/checkout@v3 #esto es para poder usar el checkout de la action del marketplace
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }} #esto es para poder usar el checkout de la action del marketplace
+      - name: listar contenido del repo
+        run: ls -la #listamos el contenido del repo
