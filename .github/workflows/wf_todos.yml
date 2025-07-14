@@ -68,4 +68,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }} #esto es para poder usar el checkout de la action del marketplace
       - name: listar contenido del repo
-        run: ls -la #listamos el contenido del repo
+        run: |
+              ls -la #listamos el contenido del repo
+              cd .github/workflows 
+              ls -la
