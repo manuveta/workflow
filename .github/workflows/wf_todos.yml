@@ -64,7 +64,7 @@ jobs:
         with:
           name: "Manuel de J. R. Velazquez Tapia"
       - name: invoca action del marketplace
-        uses: actions/checkout@v3 #esto es para poder usar el checkout de la action del marketplace
+        uses: actions/checkout@v4 #esto es para poder usar el checkout de la action del marketplace
         with:
           token: ${{ secrets.GITHUB_TOKEN }} #esto es para poder usar el checkout de la action del marketplace
       - name: listar contenido del repo
