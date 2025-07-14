@@ -70,5 +70,9 @@ jobs:
       - name: listar contenido del repo
         run: |
               ls -la #listamos el contenido del repo
+              echo "------------------------------"
               cd .github/workflows 
               ls -la
+              echo "------------------------------"
+              cat wf_todos.yml 
+              echo "------------------------------"
