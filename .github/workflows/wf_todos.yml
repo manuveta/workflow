@@ -82,7 +82,7 @@ jobs:
       - name: Commits de usuario con el api
         run: |
           USUARIO="AL07183522" 
-          REPO="Manu/workflow"        
+          REPO="manuveta/workflow"        
           echo "Buscando commits de $USUARIO en $REPO..."
           curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             "https://api.github.com/repos/$REPO/commits?author=$USUARIO"
