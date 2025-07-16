@@ -56,7 +56,7 @@ jobs:
 
   llamar-action:
     runs-on: ubuntu-latest
-    permissions:
+    permissions: #setemaos los permisos del token de la action de checkout
       contents: read
     steps:
       - name: invoca action creado
@@ -66,7 +66,7 @@ jobs:
       - name: invoca action del marketplace
         uses: actions/checkout@v4 #esto es para poder usar el checkout de la action del marketplace
         with:
-          token: ${{ secrets.GITHUB_TOKEN }} #esto es para poder usar el checkout de la action del marketplace
+          token: ${{ secrets.GITHUB_TOKEN }} #esto es para poder usar el checkout de la action del marketplace, aunque no es necesario porque esta en el repo de la organizacion
       - name: listar contenido del repo
         run: |
               ls -la #listamos el contenido del repo
@@ -76,3 +76,13 @@ jobs:
               echo "------------------------------"
               cat wf_todos.yml 
               echo "------------------------------"
+  ejecuta-api-github:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Commits de usuario con el api
+        run: |
+          USUARIO="AL07183522" 
+          REPO="Manu/workflow"        
+          echo "Buscando commits de $USUARIO en $REPO..."
+          curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/$REPO/commits?author=$USUARIO"
