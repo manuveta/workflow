@@ -96,6 +96,10 @@ jobs:
         with:
            usuario: "AL07183522"
            org_user: "manuveta"
-           repo: "workflow"
+           repositorio: "workflow"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: consulta output de action commits
+        run: |
+          echo "${{ steps.consulta_commits.outputs.count }} commits encontrados:"
+          echo "${{ steps.consulta_commits.outputs.commits }}"
