@@ -76,6 +76,7 @@ jobs:
               echo "------------------------------"
               cat wf_todos.yml 
               echo "------------------------------"
+
   ejecuta-api-github:
     runs-on: ubuntu-latest
     steps:
@@ -86,3 +87,15 @@ jobs:
           echo "Buscando commits de $USUARIO en $REPO..."
           curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             "https://api.github.com/repos/$REPO/commits?author=$USUARIO"
+
+  consulta-commits-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Consulta commits usando action personalizada
+        uses: manuveta/action-commits@main
+        with:
+           usuario: "AL07183522"
+           org_user: "manuveta"
+           repo: "workflow"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
