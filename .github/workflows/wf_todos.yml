@@ -77,6 +77,16 @@ jobs:
               cat wf_todos.yml 
               echo "------------------------------"
 
+  llamar-action-prueba:
+      runs-on: ubuntu-latest
+      permissions: #setemaos los permisos del token de la action de checkout
+        contents: read
+      steps:
+        - name: invoca action creado
+          uses: manuveta/pruebaaction@main
+          with:
+            name: "Manu"
+
   ejecuta-api-github:
     runs-on: ubuntu-latest
     steps:
