@@ -104,7 +104,7 @@ jobs:
         - name: invoca action creado
           uses: manuveta/pruebaaction@main
           with:
-            name: "${{ github.event.inputs.name }}"
+            name: "${{ github.event.inputs.name || 'Manuel de jesus ramiro vt' }}" #seteamos el nombre del input del workflow_dispatch
 
   ejecuta-api-github:
     runs-on: ubuntu-latest
