@@ -46,7 +46,6 @@ jobs:
   llamar-workflowlib:
     needs: preparar-vars
     uses: manuveta/reusable_workflows/.github/workflows/workflowlib_imprimevars.yml@main #invoca reusable wf de un repo de organizacion
-   #uses: AL07183522/reusable_wf1/.github/workflows/workflowlib_imprimevars.yml@main
     with:
       VAR_1: ${{ needs.preparar-vars.outputs.var1 }}
       VAR_2: ${{ needs.preparar-vars.outputs.var2 }}
