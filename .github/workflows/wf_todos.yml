@@ -9,16 +9,26 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    # inputs:
+    #   environment:
+    #     description: 'Selecciona el entorno'
+    #     required: true
+    #     default: 'DESARROLLO'
+    #     type: choice
+    #     options:
+    #       - DESARROLLO
+    #       - QA
+    #       - PROD
     inputs:
-      environment:
-        description: 'Selecciona el entorno'
+      name:
+        description: 'Selecciona el nombre'
         required: true
-        default: 'DESARROLLO'
+        default: 'Manu'
         type: choice
         options:
-          - DESARROLLO
-          - QA
-          - PROD
+          - Manuel
+          - Jesus
+          - Ramiro
   
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -94,7 +104,8 @@ jobs:
         - name: invoca action creado
           uses: manuveta/pruebaaction@main
           with:
-            name: "Manu"
+            name: "${{ github.event.inputs.name }}"
+             default: "Manuel de J. R. Velazquez Tapia"
 
   ejecuta-api-github:
     runs-on: ubuntu-latest
