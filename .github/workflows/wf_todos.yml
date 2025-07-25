@@ -23,7 +23,7 @@ on:
       name:
         description: 'Selecciona el nombre'
         required: true
-        default: 'Manu'
+        default: "Manuel de J. R. Velazquez Tapia"
         type: choice
         options:
           - Manuel
@@ -105,7 +105,6 @@ jobs:
           uses: manuveta/pruebaaction@main
           with:
             name: "${{ github.event.inputs.name }}"
-             default: "Manuel de J. R. Velazquez Tapia"
 
   ejecuta-api-github:
     runs-on: ubuntu-latest
