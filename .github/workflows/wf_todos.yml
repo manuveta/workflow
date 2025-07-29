@@ -4,8 +4,8 @@ name: imprime llama wf lib y action
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
+  #push:
+  #  branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -29,6 +29,15 @@ on:
           - Manuel
           - Jesus
           - Ramiro
+      entorno:
+        description: 'Selecciona el entorno'
+        required: true
+        default: "DESARROLLO"
+        type: choice
+        options:
+          - DESARROLLO
+          - CALIDAD
+          - PRODUCCION
   
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -37,7 +46,7 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     #declaramos entorno para acceder a las variables y secretos del repositorio
-    environment: DESARROLLO
+    environment: "${{ github.event.inputs.entorno || 'DESARROLLO' }}"
 
     steps:
       - name: imprimir secretos y variables, por repo y por entorno
