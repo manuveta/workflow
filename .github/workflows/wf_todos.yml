@@ -147,3 +147,13 @@ jobs:
         run: |
           echo "${{ steps.consulta_commits.outputs.count }} commits encontrados:"
           echo "${{ steps.consulta_commits.outputs.commits }}"
+  
+  consulta-fecha:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Consulta fecha de reusablke workflow
+        id: consulta_fecha
+        uses: manuveta/reusable_workflows/.github/workflows/rwfl_imprimefecha.yml@main
+      - name: imprime fecha consultada
+        run: |
+          echo "Fecha de ejecucion: ${{  steps.consulta_fecha.outputs.fecha_actual }}"
