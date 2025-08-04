@@ -149,12 +149,11 @@ jobs:
           echo "${{ steps.consulta_commits.outputs.commits }}"
   
   consulta-fecha:
-  runs-on: ubuntu-latest
-  uses: manuveta/reusable_workflows/.github/workflows/rwfl_imprimefecha.yml@main
-  with:
-  steps:
-    - name: Capturar salida de fecha
-      id: captura_fecha
-      run: echo "Fecha capturada: ${{ steps.some_step_id.outputs.some_output_key }}"
-  outputs:
-    fecha_salida: ${{ steps.captura_fecha.outputs.some_output_key }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Capturar salida de fecha
+        id: captura_fecha
+        uses: manuveta/reusable_workflows/.github/workflows/rwfl_imprimefecha.yml@main
+      - name: Imprimir fecha
+        run: |
+          echo "Fecha de salida: ${{ steps.captura_fecha.outputs.fecha_salida }}"
